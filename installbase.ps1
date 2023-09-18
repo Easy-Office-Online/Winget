@@ -1,5 +1,5 @@
 # This script checks if recent version of Winget is installed and installs software throug Winget
-# Works in conjunction with install.ps1
+# Works in conjunction with install.ps1 which is placed in intunewin
 
 $AppInstaller = Get-AppxPackage | Where-Object name -eq Microsoft.DesktopAppInstaller
 
@@ -14,17 +14,17 @@ If($AppInstaller.Version -lt "1.20.2201.0") {
             
         Write-Host "Creating Winget Packages Folder" -ForegroundColor Yellow
 
-        if (!(Test-Path -Path C:\ProgramData\WinGetPackages)) {
-            New-Item -Path C:\ProgramData\WinGetPackages -Force -ItemType Directory
+        if (!(Test-Path -Path C:\ProgramData\EOO\WinGetPackages)) {
+            New-Item -Path C:\ProgramData\EOO\WinGetPackages -Force -ItemType Directory
         }
 
-        Set-Location C:\ProgramData\WinGetPackages
+        Set-Location C:\ProgramData\EOO\WinGetPackages
 
     $progressPreference = 'silentlyContinue'
     Write-Information "Downloading WinGet and its dependencies..."
-    Invoke-WebRequest -Uri https://aka.ms/getwinget -OutFile Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
-    Invoke-WebRequest -Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
-    Invoke-WebRequest -Uri https://github.com/microsoft/microsoft-ui-xaml/releases/download/v2.7.3/Microsoft.UI.Xaml.2.7.x64.appx -OutFile Microsoft.UI.Xaml.2.7.x64.appx
+    Invoke-WebRequest -Uri https://github.com/Easy-Office-Online/Winget/blob/main/Winget-install/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.appx -OutFile Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
+    Invoke-WebRequest -Uri https://github.com/Easy-Office-Online/Winget/blob/main/Winget-install/Microsoft.VCLibs.x64.14.00.Desktop.appx -OutFile Microsoft.VCLibs.x64.14.00.Desktop.appx
+    Invoke-WebRequest -Uri https://github.com/Easy-Office-Online/Winget/blob/main/Winget-install/Microsoft.UI.Xaml.2.8.appx -OutFile Microsoft.UI.Xaml.2.7.x64.appx
     Add-AppxPackage Microsoft.VCLibs.x64.14.00.Desktop.appx
     Add-AppxPackage Microsoft.UI.Xaml.2.7.x64.appx
     Add-AppxPackage Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
