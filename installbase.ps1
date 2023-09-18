@@ -19,7 +19,7 @@ If($AppInstaller.Version -lt "1.20.2201.0") {
         }
 
         Set-Location C:\ProgramData\EOO\WinGetPackages
-
+## Bron: https://learn.microsoft.com/en-us/windows/package-manager/winget/
 $progressPreference = 'silentlyContinue'
 Write-Information "Downloading WinGet and its dependencies..."
 Invoke-WebRequest -Uri https://aka.ms/getwinget -OutFile Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle
